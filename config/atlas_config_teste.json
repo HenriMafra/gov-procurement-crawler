@@ -1,0 +1,38 @@
+{
+  "_ajuda": "Configuração do ATLAS B2G — rotina semanal. Edite os campos abaixo. Datas no formato AAAAMMDD.",
+
+  "ufs": ["DF", "GO"],
+
+  "janelas": {
+    "_ajuda": "modo=explicito usa as datas em 'explicito'; modo=relativo calcula a partir da data da rodada usando pares [dias_atras_inicio, dias_atras_fim].",
+    "modo": "explicito",
+    "explicito": [["20240516", "20240530"], ["20250414", "20250428"]],
+    "relativo_dias": [[744, 730], [411, 397]]
+  },
+
+  "max_paginas_por_janela": 85,
+  "vencido_recente_dias": 120,
+  "futuro_max_dias": 180,
+  "monitor_max_dias": 365,
+  "valor_alto": 1000000,
+  "valor_minimo": 0,
+  "score_minimo": 0,
+
+  "_concorrentes_ajuda": "Preencha com fragmentos do nome dos SEUS concorrentes reais (minúsculo). Ex.: ['oracle','megasoft']. Eleva o score e marca Ameaça Alta.",
+  "concorrentes_conhecidos": [],
+
+  "carteira_por_uf": {"DF": "Conta-Chave DF", "GO": "Goiás"},
+  "responsavel_por_uf": {"DF": "A definir (DF)", "GO": "A definir (GO)"},
+
+  "usar_cache": true,
+  "limpar_cache": false,
+  "gerar_excel": true,
+  "gerar_prototipo": true,
+  "gerar_relatorio": true,
+  "gerar_pdf": true,
+  "compactar_entrega": true,
+
+  "http": {"retries": 4, "timeout": 45, "sleep": 0.35},
+
+  "_versao_pipeline": "ATLAS B2G v1.0"
+}

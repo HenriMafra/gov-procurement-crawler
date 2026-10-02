@@ -1,0 +1,29 @@
+# === SEGREDOS — NUNCA commitar ===
+.env
+.env.*
+*.env
+config/database*.env
+
+# === Dados pesados / gerados (não vão pro git) ===
+data/
+outputs/
+logs/
+run_9uf.*.log
+*.log
+*.xlsx
+*.zip
+
+# === Python ===
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+
+# cache na raiz também
+.cache_pncp/
+**/.cache_pncp/
+*.json.gz
+
+# configs temporarios do chunk worker
+config/chunk_*.json

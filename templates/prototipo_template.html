@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ATLAS B2G — Dados Reais PNCP</title>
+<style>
+:root{--navy:#0F172A;--navy2:#1E293B;--navy3:#334155;--blue:#2563EB;--blue2:#1D4ED8;--bg:#F1F5F9;--surface:#fff;--soft:#F8FAFC;
+--line:#E2E8F0;--line2:#CBD5E1;--txt:#0F172A;--muted:#64748B;--muted2:#94A3B8;--green:#16A34A;--greenbg:#DCFCE7;--amber:#D97706;
+--amberbg:#FEF3C7;--red:#DC2626;--redbg:#FEE2E2;--yellow:#CA8A04;--yellowbg:#FEF9C3;--bluebg:#DBEAFE;--maxred:#7F1D1D;
+--shadow:0 1px 3px rgba(15,23,42,.08),0 1px 2px rgba(15,23,42,.04);--shadow2:0 6px 18px rgba(15,23,42,.12);--r:12px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;background:var(--bg);color:var(--txt);font-size:14px;line-height:1.45}
+a{color:inherit;text-decoration:none}
+::-webkit-scrollbar{width:10px;height:10px}::-webkit-scrollbar-thumb{background:#CBD5E1;border-radius:8px}
+.app{display:flex;min-height:100vh}
+.sidebar{width:248px;background:linear-gradient(180deg,#0F172A,#13203b);color:#CBD5E1;position:fixed;inset:0 auto 0 0;display:flex;flex-direction:column;z-index:40;border-right:1px solid #1e293b}
+.brand{padding:20px 20px 16px;display:flex;align-items:center;gap:11px;border-bottom:1px solid #1e293b}
+.logo{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,#2563EB,#38BDF8);display:grid;place-items:center;font-weight:800;color:#fff;font-size:15px;box-shadow:0 4px 10px rgba(37,99,235,.4)}
+.brand b{color:#fff;font-size:15px;font-weight:700}.brand span{display:block;font-size:10px;color:#64748B;letter-spacing:.5px;text-transform:uppercase;margin-top:1px}
+.nav{padding:12px;flex:1;overflow-y:auto}.nav-label{font-size:10px;text-transform:uppercase;letter-spacing:.8px;color:#475569;padding:12px 12px 6px;font-weight:700}
+.nav a{display:flex;align-items:center;gap:11px;padding:9px 12px;border-radius:9px;color:#94A3B8;font-weight:500;margin-bottom:2px;cursor:pointer;transition:.15s;border-left:3px solid transparent}
+.nav a:hover{background:#1e293b;color:#E2E8F0}.nav a.active{background:#1e293b;color:#fff;border-left-color:#2563EB}
+.nav a svg{width:18px;height:18px;flex:none;opacity:.9}.nav a .pill{margin-left:auto;background:#DC2626;color:#fff;font-size:10px;font-weight:700;border-radius:20px;padding:1px 7px}
+.sb-foot{padding:12px 18px;border-top:1px solid #1e293b;font-size:10.5px;color:#475569;line-height:1.4}
+.main{flex:1;margin-left:248px;display:flex;flex-direction:column;min-width:0}
+.header{height:64px;background:rgba(255,255,255,.9);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:16px;padding:0 26px;position:sticky;top:0;z-index:30}
+.search{flex:1;max-width:560px;position:relative}.search input{width:100%;height:40px;border:1px solid var(--line2);border-radius:10px;padding:0 14px 0 40px;font-size:14px;background:var(--soft);font-family:inherit}
+.search input:focus{outline:none;border-color:var(--blue);background:#fff;box-shadow:0 0 0 3px rgba(37,99,235,.12)}
+.search svg{position:absolute;left:12px;top:11px;width:18px;height:18px;color:var(--muted)}
+.hd-right{margin-left:auto;display:flex;align-items:center;gap:12px}.role-sel{border:1px solid var(--line2);border-radius:9px;height:38px;padding:0 12px;background:#fff;font-family:inherit;font-size:13px;cursor:pointer}
+.avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#2563EB,#7C3AED);color:#fff;display:grid;place-items:center;font-weight:700}
+.content{padding:24px 26px;max-width:1480px;width:100%}
+.pubtag{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;color:#15803D;background:var(--greenbg);border-radius:20px;padding:3px 10px}
+.page-head{margin-bottom:18px}.page-head h1{font-size:22px;font-weight:800;letter-spacing:-.3px}.page-head p{color:var(--muted);font-size:13.5px;margin-top:3px}
+.crumb{font-size:12px;color:var(--muted);margin-bottom:10px}.crumb a:hover{color:var(--blue)}
+.sect-title{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--navy3);margin:0 0 12px}
+.grid{display:grid;gap:16px}.row{display:flex;gap:14px;flex-wrap:wrap}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow)}.card.pad{padding:18px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:15px 16px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.kpi .lbl{font-size:10.5px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);font-weight:600}.kpi .val{font-size:25px;font-weight:800;margin-top:6px;letter-spacing:-.5px}.kpi .sub{font-size:11.5px;color:var(--muted);margin-top:2px}
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.kpi-grid.s5{grid-template-columns:repeat(5,1fr)}.kpi-grid.s6{grid-template-columns:repeat(6,1fr)}
+.badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;border-radius:20px;padding:3px 9px;white-space:nowrap}
+.badge.dot::before{content:'';width:6px;height:6px;border-radius:50%;background:currentColor}
+.b-green{background:var(--greenbg);color:#15803D}.b-amber{background:var(--amberbg);color:#B45309}.b-red{background:var(--redbg);color:#B91C1C}
+.b-yellow{background:var(--yellowbg);color:#A16207}.b-blue{background:var(--bluebg);color:#1D4ED8}.b-gray{background:#F1F5F9;color:#475569}.b-navy{background:#1e293b;color:#fff}
+.b-max{background:#7F1D1D;color:#fff}
+.btn{display:inline-flex;align-items:center;gap:7px;height:38px;padding:0 15px;border-radius:9px;font-weight:600;font-size:13px;cursor:pointer;border:1px solid transparent;transition:.15s;background:#fff;font-family:inherit}
+.btn svg{width:16px;height:16px}.btn-primary{background:var(--blue);color:#fff}.btn-primary:hover{background:var(--blue2)}
+.btn-ghost{background:#fff;border-color:var(--line2);color:var(--navy3)}.btn-ghost:hover{background:var(--soft)}.btn-sm{height:32px;padding:0 11px;font-size:12.5px}.btn-dark{background:var(--navy);color:#fff}
+.tbl-wrap{overflow-x:auto;border-radius:var(--r)}table{width:100%;border-collapse:collapse;font-size:13px;background:#fff}
+thead th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);font-weight:700;padding:10px 12px;background:var(--soft);border-bottom:1px solid var(--line);white-space:nowrap;cursor:pointer}
+tbody td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:middle}tbody tr{cursor:pointer;transition:.1s}tbody tr:hover{background:var(--soft)}
+.t-strong{font-weight:600}.t-muted{color:var(--muted);font-size:12px}
+.ring{position:relative;width:var(--sz,58px);height:var(--sz,58px);border-radius:50%;display:grid;place-items:center;flex:none;background:conic-gradient(var(--c) calc(var(--p)*1%),#E2E8F0 0)}
+.ring .inner{width:calc(var(--sz,58px) - 11px);height:calc(var(--sz,58px) - 11px);background:#fff;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:calc(var(--sz,58px)/3.3)}.ring.sm{--sz:44px}
+.layout-2{display:grid;grid-template-columns:230px 1fr;gap:18px;align-items:start}
+.filters .fg{margin-bottom:16px}.filters h5{font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);font-weight:700;margin-bottom:8px}
+.chiplist{display:flex;flex-wrap:wrap;gap:6px}.fchip{font-size:12px;border:1px solid var(--line2);background:#fff;border-radius:20px;padding:4px 11px;cursor:pointer;transition:.12s;color:var(--navy3)}
+.fchip:hover{border-color:var(--blue);color:var(--blue)}.fchip.on{background:var(--blue);border-color:var(--blue);color:#fff}
+.banner{display:flex;align-items:center;gap:12px;padding:13px 16px;border-radius:10px;font-size:13.5px;font-weight:500}
+.banner.red{background:var(--redbg);color:#991B1B;border:1px solid #FCA5A5}.banner.amber{background:var(--amberbg);color:#92400E;border:1px solid #FCD34D}.banner svg{width:20px;height:20px;flex:none}
+.info-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:13px 20px}.info-grid .k{font-size:10.5px;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);font-weight:600}.info-grid .v{font-weight:600;margin-top:2px;font-size:13.5px}
+.actions{display:flex;gap:9px;flex-wrap:wrap}.opp-card{border:1px solid var(--line);border-radius:11px;padding:14px;background:#fff;box-shadow:var(--shadow)}
+.atk-card{border:1px solid var(--line);border-left:4px solid var(--blue);border-radius:10px;padding:13px;background:#fff;box-shadow:var(--shadow);cursor:pointer;transition:.12s}.atk-card:hover{box-shadow:var(--shadow2)}
+.atk-card.u-Crítica{border-left-color:var(--red)}.atk-card.u-Alta{border-left-color:var(--amber)}.atk-card.u-Média{border-left-color:var(--yellow)}
+.sem{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:6px}.sem.Crítica{background:var(--red)}.sem.Alta{background:var(--amber)}.sem.Média{background:var(--yellow)}.sem.Baixa{background:var(--blue)}.sem.Revisão{background:var(--muted2)}
+.empty{padding:34px;text-align:center;color:var(--muted)}.tag{font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.4px}
+.disc{font-size:11px;color:var(--muted);background:var(--soft);border:1px solid var(--line);border-radius:8px;padding:8px 12px;margin-top:16px}
+#toast{position:fixed;bottom:22px;right:22px;z-index:80;display:flex;flex-direction:column;gap:10px}
+.toast{background:var(--navy);color:#fff;padding:12px 16px;border-radius:10px;box-shadow:var(--shadow2);font-size:13.5px;display:flex;align-items:center;gap:10px;animation:su .3s ease;max-width:360px}.toast svg{width:18px;height:18px;color:#4ADE80;flex:none}
+@keyframes su{from{transform:translateY(14px);opacity:0}to{transform:none;opacity:1}}
+.menu-btn{display:none;width:38px;height:38px;border-radius:9px;border:1px solid var(--line2);background:#fff;place-items:center;cursor:pointer}
+@media(max-width:980px){.sidebar{transform:translateX(-100%);transition:.25s}.sidebar.open{transform:none}.main{margin-left:0}.kpi-grid,.kpi-grid.s5,.kpi-grid.s6{grid-template-columns:repeat(2,1fr)}.layout-2{grid-template-columns:1fr}.menu-btn{display:grid}}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand"><div class="logo">A</div><div><b>ATLAS B2G</b><span>Dados Reais · PNCP</span></div></div>
+    <nav class="nav" id="nav"></nav>
+    <div class="sb-foot">Dados públicos do PNCP<br>DF + Goiás · Tecnologia<br>Depende de validação humana</div>
+  </aside>
+  <div class="main">
+    <header class="header">
+      <button class="menu-btn" onclick="document.getElementById('sidebar').classList.toggle('open')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg></button>
+      <div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+        <input id="gs" placeholder="Buscar órgão, ministério, UF, categoria, fornecedor, objeto, contrato…" autocomplete="off"></div>
+      <div class="hd-right"><span class="pubtag">● Dados públicos PNCP</span><div class="avatar">CC</div></div>
+    </header>
+    <div class="content" id="view"></div>
+  </div>
+</div>
+<div id="toast"></div>
+<script>
+/*__ATLAS_DATA__*/
+</script>
+<script>
+/* ===================== DERIVAÇÃO ===================== */
+const OPP = (window.ATLAS_DATA||[]).slice().sort((a,b)=>b.score-a.score);
+OPP.forEach((o,i)=>o._rank=i+1);
+const fmtBRL=v=>v==null||v===''?'—':'R$ '+Number(v).toLocaleString('pt-BR',{maximumFractionDigits:0});
+const fmtBRLk=v=>{v=Number(v)||0;return v>=1e6?'R$ '+(v/1e6).toLocaleString('pt-BR',{maximumFractionDigits:1})+' mi':v>=1e3?'R$ '+(v/1e3).toFixed(0)+' mil':fmtBRL(v);};
+const norm=s=>(s||'').toString().normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();
+const by=(arr,k)=>{const m={};arr.forEach(x=>{const v=k(x);(m[v]=m[v]||[]).push(x);});return m;};
+const sum=(arr,k)=>arr.reduce((s,x)=>s+(Number(k(x))||0),0);
+// órgãos consolidados
+const ORG_MAP=by(OPP,o=>o.cnpjOrgao||o.orgao);
+const ORGAOS=Object.entries(ORG_MAP).map(([k,ops])=>({chave:k,nome:ops[0].orgaoPad||ops[0].orgao,oficial:ops[0].orgao,cnpj:ops[0].cnpjOrgao,uf:ops[0].uf,municipio:ops[0].municipio,esfera:ops[0].esfera,poder:ops[0].poder,segmento:ops[0].segmento,ops,valor:sum(ops,o=>o.valor),score:Math.max(...ops.map(o=>o.score)),n:ops.length}));
+// fornecedores consolidados
+const FORN_MAP=by(OPP.filter(o=>o.fornecedor),o=>o.fornecedor);
+const FORNS=Object.entries(FORN_MAP).map(([k,ops])=>({nome:k,ops,n:ops.length,valor:sum(ops,o=>o.valor),concorrente:ops.some(o=>o.concorrente),ameaca:ops[0].ameaca,ufs:[...new Set(ops.map(o=>o.uf))],cats:[...new Set(ops.map(o=>o.categoria))],orgaos:[...new Set(ops.map(o=>o.orgao))].length,vencendo:ops.filter(o=>o.dias!=null&&o.dias>=0&&o.dias<=180).length})).sort((a,b)=>b.valor-a.valor);
+const oppById=id=>OPP.find(o=>o.id===id);
+const orgByChave=c=>ORGAOS.find(o=>o.chave===c);
+
+const KPI=()=>({
+ n:OPP.length, valor:sum(OPP,o=>o.valor),
+ criticas:OPP.filter(o=>o.prioridade==='Ataque máximo'||o.prioridade==='Prioridade crítica'||o.urgencia==='Crítica').length,
+ alta:OPP.filter(o=>o.urgencia==='Alta').length,
+ imediato:OPP.filter(o=>o.janela==='Ataque imediato').length,
+ vencidos:OPP.filter(o=>o.dias!=null&&o.dias<0).length,
+ v30:OPP.filter(o=>o.dias!=null&&o.dias>=0&&o.dias<=30).length,
+ df:OPP.filter(o=>o.uf==='DF').length, go:OPP.filter(o=>o.uf==='GO').length,
+ revisao:OPP.filter(o=>o.revisao).length,
+});
+
+/* ===================== BADGES ===================== */
+function bPrio(p){const m={'Ataque máximo':'b-max','Prioridade crítica':'b-red','Alta prioridade':'b-amber','Média prioridade':'b-yellow','Monitoramento':'b-blue','Baixa / revisão':'b-gray'};return `<span class="badge ${m[p]||'b-gray'}">${p}</span>`;}
+function bUrg(u){const m={'Crítica':'b-red','Alta':'b-amber','Média':'b-yellow','Baixa':'b-blue','Revisão':'b-gray'};return `<span class="badge ${m[u]||'b-gray'} dot">${u}</span>`;}
+function bJanela(j){const m={'Ataque imediato':'b-red','Abordagem prioritária':'b-amber','Preparação comercial':'b-yellow','Nutrição estratégica':'b-blue','Monitoramento':'b-gray','Validação manual':'b-gray'};return `<span class="badge ${m[j]||'b-gray'}">${j}</span>`;}
+function scoreColor(s){return s>=90?'#7F1D1D':s>=80?'var(--red)':s>=70?'var(--amber)':s>=50?'var(--yellow)':'var(--blue)';}
+function ring(s,sz){return `<div class="ring ${sz==='sm'?'sm':''}" style="--p:${s};--c:${scoreColor(s)}"><div class="inner" style="color:${scoreColor(s)}">${s}</div></div>`;}
+function vencTxt(o){if(o.dias==null)return '<span class="t-muted">sem data</span>';if(o.dias<0)return `<span style="color:var(--red);font-weight:600">venceu há ${Math.abs(o.dias)}d</span>`;const c=o.dias<=30?'var(--red)':o.dias<=60?'var(--amber)':o.dias<=90?'var(--yellow)':'var(--green)';return `<span style="color:${c};font-weight:600">${o.dias} dias</span>`;}
+
+/* ===================== NAV ===================== */
+const NAV=[['home','Home Executiva','M3 12l9-9 9 9M5 10v10h14V10'],
+['ataque','Lista de Ataque','M3 3v18h18M7 14l4-4 3 3 5-6'],
+['busca','Busca Global','M11 4a7 7 0 100 14 7 7 0 000-14zM21 21l-4.3-4.3'],
+['distribuicao','Distribuição','M3 7h18v12H3zM3 7l2-3h14l2 3M9 7v12'],
+['concorrentes','Concorrentes','M12 2l2.5 6.5L21 9l-5 4 1.5 7L12 16l-5.5 4L8 13 3 9l6.5-.5z'],
+['qualidade','Qualidade & Revisão','M9 12l2 2 4-4M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z']];
+function buildNav(){const k=KPI();document.getElementById('nav').innerHTML=`<div class="nav-label">Comercial</div>`+
+ NAV.map(n=>`<a data-r="${n[0]}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="${n[2]}"/></svg>${n[1]}${n[0]==='ataque'?`<span class="pill">${k.criticas}</span>`:''}</a>`).join('');
+ document.querySelectorAll('#nav a').forEach(a=>a.onclick=()=>{location.hash='#/'+a.dataset.r;document.getElementById('sidebar').classList.remove('open');});}
+const view=()=>document.getElementById('view');
+
+/* ===================== HOME ===================== */
+function renderHome(){const k=KPI();
+ const top=OPP.slice(0,6);
+ const cat=Object.entries(by(OPP,o=>o.categoria)).map(([c,a])=>[c,a.length,sum(a,o=>o.valor)]).sort((a,b)=>b[1]-a[1]);
+ const orgTop=[...ORGAOS].sort((a,b)=>b.valor-a.valor).slice(0,5);
+ view().innerHTML=`
+ <div class="page-head"><h1>Home Executiva</h1><p>Rodada real PNCP · ${k.n} oportunidades de TI em DF/GO · ${fmtBRLk(k.valor)} mapeados · janela comercial (vencidos recentes + vencendo ≤180d)</p></div>
+ <div class="banner red" style="margin-bottom:16px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
+  <b>${k.imediato} oportunidades em "ataque imediato"</b> — ${k.criticas} críticas · ${k.vencidos} contratos vencidos recentemente · ${k.v30} vencendo em ≤30 dias.</div>
+ <div class="kpi-grid" style="margin-bottom:14px">
+  ${kc('Oportunidades reais',k.n,'DF + GO','var(--blue)','var(--bluebg)')}
+  ${kc('Valor mapeado',fmtBRLk(k.valor),'em contratos','var(--green)','var(--greenbg)')}
+  ${kc('Críticas',k.criticas,'prioridade máxima/crítica','var(--red)','var(--redbg)')}
+  ${kc('Ataque imediato',k.imediato,'agir esta semana','#7F1D1D','var(--redbg)')}</div>
+ <div class="kpi-grid s5" style="margin-bottom:22px">
+  ${km('Vencidos recentes',k.vencidos,'var(--red)')}${km('Vencendo ≤30d',k.v30,'var(--amber)')}
+  ${km('DF',k.df,'var(--navy)')}${km('GO',k.go,'var(--navy)')}${km('Necessitam revisão',k.revisao,'var(--muted)')}</div>
+ <div style="display:flex;align-items:center;margin-bottom:12px"><div class="sect-title" style="margin:0">⚡ Lista de Ataque da Semana</div>
+  <a class="btn btn-primary btn-sm" style="margin-left:auto" onclick="location.hash='#/ataque'">Ver lista completa</a></div>
+ <div class="grid" style="grid-template-columns:repeat(3,1fr);margin-bottom:22px">
+  ${top.map(o=>`<div class="atk-card u-${o.urgencia}" onclick="location.hash='#/oportunidade/${o.id}'">
+   <div style="display:flex;justify-content:space-between;align-items:flex-start"><div><div class="t-strong" style="font-size:14px">${o.orgaoPad}</div><div class="t-muted">${o.uf} · ${o.categoria}</div></div>${ring(o.score,'sm')}</div>
+   <div style="font-weight:800;color:var(--navy);margin:8px 0 6px">${fmtBRL(o.valor)}</div>
+   <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px">${bUrg(o.urgencia)}${bJanela(o.janela)}</div>
+   <div class="t-muted" style="font-size:12px">${vencTxt(o)} · ${o.fornecedor?o.fornecedor.slice(0,28):'—'}</div>
+   <div style="font-size:12px;margin-top:7px"><b style="color:var(--navy3)">Ação:</b> ${o.proximaAcao.slice(0,70)}…</div></div>`).join('')}</div>
+ <div class="grid" style="grid-template-columns:1fr 1fr">
+  <div class="card pad"><div class="sect-title">Top categorias</div><div class="tbl-wrap"><table><thead><tr><th>Categoria</th><th>Oport.</th><th>Valor</th></tr></thead><tbody>
+   ${cat.slice(0,7).map(c=>`<tr onclick="location.hash='#/ataque'"><td class="t-strong">${c[0]}</td><td>${c[1]}</td><td>${fmtBRLk(c[2])}</td></tr>`).join('')}</tbody></table></div></div>
+  <div class="card pad"><div class="sect-title">Top órgãos por valor</div><div class="tbl-wrap"><table><thead><tr><th>Órgão</th><th>UF</th><th>Valor</th><th>Score</th></tr></thead><tbody>
+   ${orgTop.map(o=>`<tr onclick="location.hash='#/orgao/${encodeURIComponent(o.chave)}'"><td class="t-strong">${o.nome}</td><td>${o.uf}</td><td>${fmtBRLk(o.valor)}</td><td>${ring(o.score,'sm')}</td></tr>`).join('')}</tbody></table></div></div></div>
+ ${disc()}`;}
+function kc(l,v,s,col,bg){return `<div class="kpi"><div class="lbl">${l}</div><div class="val">${v}</div><div class="sub">${s}</div></div>`;}
+function km(l,v,col){return `<div class="kpi"><div class="lbl">${l}</div><div class="val" style="color:${col}">${v}</div></div>`;}
+function disc(){return `<div class="disc">⚠️ Dados públicos do PNCP. Fornecedores aparecem como <b>"possível concorrente"</b> (a validar). Itens marcados como <b>"necessita revisão"</b> dependem de validação humana. Nenhuma oportunidade é garantida — esta é uma fila de priorização comercial, não uma certeza de negócio.</div>`;}
+
+/* ===================== LISTA DE ATAQUE ===================== */
+let FA={uf:null,cat:null,urg:null,janela:null,score:null,valor:null,forn:null,rev:null,venc:null,q:''};
+function renderAtaque(){
+ const cats=[...new Set(OPP.map(o=>o.categoria))].sort();
+ const forns=[...new Set(OPP.map(o=>o.fornecedor).filter(Boolean))].sort();
+ view().innerHTML=`
+ <div class="page-head"><h1>⚡ Lista de Ataque</h1><p>Fila priorizada por score comercial. Filtre, abra a ficha e distribua para os vendedores.</p></div>
+ <div id="atkcards" class="kpi-grid" style="margin-bottom:16px"></div>
+ <div class="layout-2">
+  <div class="card pad filters">
+   ${fg('UF','uf',['DF','GO'])}
+   ${fg('Urgência','urg',['Crítica','Alta','Média','Baixa','Revisão'])}
+   ${fg('Janela comercial','janela',['Ataque imediato','Abordagem prioritária','Preparação comercial','Nutrição estratégica','Monitoramento'])}
+   ${fg('Vencimento','venc',['Vencidos','≤30d','≤60d','≤90d','≤180d'])}
+   ${fg('Score','score',['≥90','≥80','≥70'])}
+   ${fg('Valor mínimo','valor',['≥1 mi','≥500 mil','≥100 mil'])}
+   ${fg('Categoria','cat',cats)}
+   ${fg('Necessita revisão','rev',['Sim'])}
+   <a class="btn btn-ghost btn-sm" onclick="FA={uf:null,cat:null,urg:null,janela:null,score:null,valor:null,forn:null,rev:null,venc:null,q:''};renderAtaque()">Limpar filtros</a>
+  </div>
+  <div>
+   <div class="row" style="margin-bottom:12px">
+    <a class="btn btn-dark btn-sm" onclick="toast('Lista exportada (simulado)')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>Exportar lista</a>
+    <a class="btn btn-primary btn-sm" onclick="toast('Top 10 marcadas como distribuídas (simulado)')">Marcar Top 10 como distribuída</a>
+   </div>
+   <div class="tbl-wrap card" id="atktbl"></div>
+  </div>
+ </div>${disc()}`;
+ drawAtaque();
+ document.querySelectorAll('.filters .fchip').forEach(ch=>ch.onclick=()=>{const k=ch.dataset.k,v=ch.dataset.v;FA[k]=FA[k]===v?null:v;
+  document.querySelectorAll(`.fchip[data-k="${k}"]`).forEach(x=>x.classList.toggle('on',x.dataset.v===FA[k]));drawAtaque();});}
+function fg(t,key,vals){return `<div class="fg"><h5>${t}</h5><div class="chiplist">${vals.map(v=>`<span class="fchip ${FA[key]===v?'on':''}" data-k="${key}" data-v="${v}">${v}</span>`).join('')}</div></div>`;}
+function ataqueFiltrado(){
+ let r=OPP.slice();
+ if(FA.uf)r=r.filter(o=>o.uf===FA.uf);
+ if(FA.cat)r=r.filter(o=>o.categoria===FA.cat);
+ if(FA.urg)r=r.filter(o=>o.urgencia===FA.urg);
+ if(FA.janela)r=r.filter(o=>o.janela===FA.janela);
+ if(FA.rev)r=r.filter(o=>o.revisao);
+ if(FA.score)r=r.filter(o=>o.score>=+FA.score.replace('≥',''));
+ if(FA.valor){const m={'≥1 mi':1e6,'≥500 mil':5e5,'≥100 mil':1e5}[FA.valor];r=r.filter(o=>o.valor>=m);}
+ if(FA.venc){r=r.filter(o=>{if(o.dias==null)return false;if(FA.venc==='Vencidos')return o.dias<0;const lim=+FA.venc.replace('≤','').replace('d','');return o.dias>=0&&o.dias<=lim;});}
+ if(FA.q){const q=norm(FA.q);r=r.filter(o=>norm([o.orgao,o.orgaoPad,o.uf,o.municipio,o.categoria,o.fornecedor,o.objeto,o.numContrato].join(' ')).includes(q));}
+ return r;}
+function drawAtaque(){
+ const r=ataqueFiltrado();
+ document.getElementById('atkcards').innerHTML=
+  km('Oportunidades',r.length,'var(--navy)')+km('Valor filtrado',fmtBRLk(sum(r,o=>o.valor)),'var(--green)')+
+  km('Críticas',r.filter(o=>o.urgencia==='Crítica').length,'var(--red)')+km('Ataque imediato',r.filter(o=>o.janela==='Ataque imediato').length,'#7F1D1D');
+ document.getElementById('atktbl').innerHTML=`<table><thead><tr><th>#</th><th>Órgão</th><th>UF</th><th>Categoria</th><th>Fornecedor atual</th><th>Valor</th><th>Vencimento</th><th>Janela</th><th>Urgência</th><th>Score</th><th>Próxima ação</th><th></th></tr></thead><tbody>
+  ${r.length?r.map(o=>`<tr onclick="location.hash='#/oportunidade/${o.id}'">
+   <td class="t-muted">${o._rank}</td><td class="t-strong">${o.orgaoPad}${o.revisao?' <span class="badge b-gray" style="padding:1px 6px">rev</span>':''}<div class="t-muted">${o.objeto.slice(0,46)}…</div></td>
+   <td>${o.uf}</td><td><span class="badge b-gray">${o.categoria}</span></td><td class="t-muted">${o.fornecedor?o.fornecedor.slice(0,26):'—'}${o.concorrente?' ⚔':''}</td>
+   <td class="t-strong">${fmtBRL(o.valor)}</td><td>${vencTxt(o)}</td><td>${bJanela(o.janela)}</td><td><span class="sem ${o.urgencia}"></span>${o.urgencia}</td>
+   <td>${ring(o.score,'sm')}</td><td class="t-muted" style="max-width:240px">${o.proximaAcao.slice(0,72)}…</td>
+   <td><a class="btn btn-primary btn-sm" onclick="event.stopPropagation();location.hash='#/oportunidade/${o.id}'">Ficha</a></td></tr>`).join('')
+   :`<tr><td colspan="12"><div class="empty">Nenhuma oportunidade com os filtros aplicados.</div></td></tr>`}</tbody></table>`;}
+
+/* ===================== FICHA DA OPORTUNIDADE ===================== */
+function renderOportunidade(id){const o=oppById(id);if(!o){view().innerHTML='<div class="empty">Oportunidade não encontrada.</div>';return;}
+ view().innerHTML=`
+ <div class="crumb"><a onclick="location.hash='#/ataque'">Lista de Ataque</a> › ${o.id}</div>
+ <div style="display:flex;gap:16px;align-items:flex-start;margin-bottom:16px">
+  <div style="flex:1"><div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap"><h1 style="font-size:22px;font-weight:800">${o.orgaoPad}</h1>${bPrio(o.prioridade)}${bUrg(o.urgencia)}${bJanela(o.janela)}</div>
+   <p class="t-muted" style="margin-top:5px">${o.uf} · ${o.municipio} · ${o.esfera} ${o.poder} · ${o.segmento} · CNPJ ${o.cnpjOrgao}</p></div>
+  <div style="text-align:center"><div class="tag">Score</div>${ring(o.score)}</div></div>
+ <div class="banner amber" style="margin-bottom:16px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+  <div><b>${o.explica||o.motivo}</b></div></div>
+ <div class="grid" style="grid-template-columns:1fr 330px">
+  <div>
+   <div class="card pad" style="margin-bottom:16px"><div class="sect-title">Resumo comercial</div>
+    <div class="info-grid"><div><div class="k">Categoria</div><div class="v">${o.categoria}${o.subcat?' · '+o.subcat:''}</div></div>
+     <div><div class="k">Valor total</div><div class="v">${fmtBRL(o.valor)}</div></div>
+     <div><div class="k">Fornecedor atual</div><div class="v">${o.fornecedor||'—'}</div></div>
+     <div><div class="k">Possível concorrente</div><div class="v">${o.concorrente?'Sim ('+o.ameaca+')':'Não'}</div></div>
+     <div><div class="k">Tipo de oportunidade</div><div class="v">${o.tipo}</div></div>
+     <div><div class="k">Recorrência fornecedor</div><div class="v">${o.recorrencia||1} contrato(s)</div></div></div></div>
+   <div class="card pad" style="margin-bottom:16px"><div class="sect-title">Contrato</div>
+    <div class="info-grid"><div><div class="k">Nº contrato</div><div class="v">${o.numContrato||'—'}</div></div>
+     <div><div class="k">Processo</div><div class="v">${o.processo||'—'}</div></div>
+     <div><div class="k">Assinatura</div><div class="v">${o.assinatura||'—'}</div></div>
+     <div><div class="k">Início vigência</div><div class="v">${o.inicio||'—'}</div></div>
+     <div><div class="k">Término vigência</div><div class="v">${o.fim||'—'}</div></div>
+     <div><div class="k">Dias até vencimento</div><div class="v">${o.dias==null?'—':o.dias}</div></div>
+     <div><div class="k">Status</div><div class="v">${o.status}</div></div>
+     <div><div class="k">Fonte</div><div class="v">${o.fonte}</div></div></div>
+    <div style="margin-top:10px;font-size:13px"><b>Objeto:</b> ${o.objeto}</div></div>
+   <div class="card pad"><div class="sect-title">Inteligência comercial</div>
+    <div style="margin-bottom:10px"><div class="k tag">Explicação do score</div><div style="margin-top:3px">${o.explica||o.motivo}</div></div>
+    <div style="margin-bottom:10px"><div class="k tag">Argumento comercial sugerido</div><div style="margin-top:3px;font-weight:500">${o.argumento}</div></div>
+    <div style="margin-bottom:10px"><div class="k tag">Próxima ação recomendada</div><div style="margin-top:3px;font-weight:600;color:var(--blue)">${o.proximaAcao}</div></div>
+    <div style="display:flex;gap:7px;flex-wrap:wrap">${o.revisao?'<span class="badge b-gray">Necessita revisão</span>':''}<span class="badge b-blue">Confiança TI: ${o.conf}</span></div></div>
+  </div>
+  <div>
+   <div class="card pad" style="margin-bottom:16px"><div class="sect-title">Ações</div><div class="actions">
+    <a class="btn btn-primary" onclick="toast('Contato registrado (simulado)')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>Registrar contato</a>
+    <a class="btn btn-dark" onclick="toast('Tarefa criada (simulado)')">Criar tarefa</a>
+    <a class="btn btn-ghost" onclick="toast('Vendedor atribuído (simulado)')">Atribuir vendedor</a>
+    <a class="btn btn-ghost" onclick="toast('Oportunidade exportada (simulado)')">Exportar oportunidade</a>
+    <a class="btn btn-ghost" href="${o.link}" target="_blank" rel="noopener">Abrir fonte PNCP ↗</a>
+    <a class="btn btn-ghost" onclick="toast('Marcada como validada (simulado)')">Marcar validada</a>
+    <a class="btn btn-ghost" onclick="toast('Enviada para revisão (simulado)')">Enviar p/ revisão</a></div></div>
+   <div class="card pad"><div class="sect-title">Sugestão de carteira</div>
+    <div class="info-grid"><div><div class="k">Responsável sugerido</div><div class="v">${o.responsavel}</div></div>
+     <div><div class="k">Carteira sugerida</div><div class="v">${o.carteira}</div></div></div>
+    <a class="btn btn-ghost btn-sm" style="margin-top:12px" onclick="location.hash='#/orgao/${encodeURIComponent(o.cnpjOrgao||o.orgao)}'">Ver ficha do órgão →</a></div>
+  </div></div>${disc()}`;}
+
+/* ===================== FICHA DO ÓRGÃO ===================== */
+function renderOrgao(chave){const o=orgByChave(decodeURIComponent(chave));if(!o){view().innerHTML='<div class="empty">Órgão não encontrado.</div>';return;}
+ const merece=o.score>=80||o.ops.some(x=>x.urgencia==='Crítica');
+ view().innerHTML=`
+ <div class="crumb"><a onclick="location.hash='#/ataque'">Lista de Ataque</a> › ${o.nome}</div>
+ <div style="display:flex;gap:16px;align-items:flex-start;margin-bottom:16px"><div style="flex:1">
+  <h1 style="font-size:22px;font-weight:800">${o.nome}</h1>
+  <p class="t-muted" style="margin-top:5px">${o.esfera} ${o.poder} · ${o.segmento} · ${o.municipio}/${o.uf} · CNPJ ${o.cnpj}</p></div>
+  <div style="text-align:center"><div class="tag">Score máx.</div>${ring(o.score)}</div></div>
+ <div class="banner ${merece?'red':'amber'}" style="margin-bottom:16px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 2 7l10 5 10-5z"/></svg>
+  <div><b>Esse órgão merece atenção comercial agora?</b> ${merece?'SIM — ':''}${o.n} oportunidade(s) de TI · ${fmtBRL(o.valor)} mapeados · categorias: ${[...new Set(o.ops.map(x=>x.categoria))].join(', ')}.</div></div>
+ <div class="card pad"><div class="sect-title">Oportunidades do órgão</div><div class="tbl-wrap"><table><thead><tr><th>Categoria</th><th>Objeto</th><th>Fornecedor</th><th>Valor</th><th>Vencimento</th><th>Urgência</th><th>Score</th><th></th></tr></thead><tbody>
+  ${o.ops.sort((a,b)=>b.score-a.score).map(x=>`<tr onclick="location.hash='#/oportunidade/${x.id}'"><td><span class="badge b-gray">${x.categoria}</span></td><td>${x.objeto.slice(0,54)}…</td><td class="t-muted">${x.fornecedor?x.fornecedor.slice(0,24):'—'}${x.concorrente?' ⚔':''}</td><td class="t-strong">${fmtBRL(x.valor)}</td><td>${vencTxt(x)}</td><td><span class="sem ${x.urgencia}"></span>${x.urgencia}</td><td>${ring(x.score,'sm')}</td><td><a class="btn btn-primary btn-sm" onclick="event.stopPropagation();location.hash='#/oportunidade/${x.id}'">Ficha</a></td></tr>`).join('')}
+ </tbody></table></div></div>${disc()}`;}
+
+/* ===================== BUSCA ===================== */
+function renderBusca(q){q=q||'';
+ const r=q?OPP.filter(o=>norm([o.orgao,o.orgaoPad,o.uf,o.municipio,o.categoria,o.fornecedor,o.objeto,o.numContrato,o.urgencia,o.janela,o.score].join(' ')).includes(norm(q))):OPP;
+ view().innerHTML=`<div class="page-head"><h1>Busca Global</h1><p>Pesquise nas ${OPP.length} oportunidades reais por órgão, UF, categoria, fornecedor, objeto, contrato…</p></div>
+ <div class="card pad" style="margin-bottom:14px"><div class="search" style="max-width:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+  <input id="pgs" placeholder="ex.: ministério, STF, GO, cyber, software, oracle, datacenter" value="${q.replace(/"/g,'&quot;')}"></div><div class="t-muted" style="margin-top:9px">${r.length} resultado(s)</div></div>
+ <div class="tbl-wrap card"><table><thead><tr><th>Órgão</th><th>UF</th><th>Categoria</th><th>Valor</th><th>Fornecedor</th><th>Vencimento</th><th>Score</th><th>Prioridade</th><th></th></tr></thead><tbody>
+  ${r.length?r.map(o=>`<tr onclick="location.hash='#/oportunidade/${o.id}'"><td class="t-strong">${o.orgaoPad}<div class="t-muted">${o.objeto.slice(0,40)}…</div></td><td>${o.uf}</td><td><span class="badge b-gray">${o.categoria}</span></td><td class="t-strong">${fmtBRL(o.valor)}</td><td class="t-muted">${o.fornecedor?o.fornecedor.slice(0,22):'—'}</td><td>${vencTxt(o)}</td><td>${ring(o.score,'sm')}</td><td>${bPrio(o.prioridade)}</td>
+   <td style="white-space:nowrap"><a class="btn btn-primary btn-sm" onclick="event.stopPropagation();location.hash='#/oportunidade/${o.id}'">Oportunidade</a> <a class="btn btn-ghost btn-sm" onclick="event.stopPropagation();location.hash='#/orgao/${encodeURIComponent(o.cnpjOrgao||o.orgao)}'">Órgão</a></td></tr>`).join('')
+   :`<tr><td colspan="9"><div class="empty">Nada encontrado para "${q}".</div></td></tr>`}</tbody></table></div>`;
+ const i=document.getElementById('pgs');i.focus();i.setSelectionRange(i.value.length,i.value.length);
+ i.oninput=()=>{clearTimeout(window._st);window._st=setTimeout(()=>location.hash='#/busca?q='+encodeURIComponent(i.value),150);};}
+
+/* ===================== DISTRIBUIÇÃO ===================== */
+function renderDistribuicao(){
+ const porCart=by(OPP,o=>o.carteira||o.uf);
+ view().innerHTML=`<div class="page-head"><h1>Distribuição Comercial</h1><p>Coordenação: distribua as oportunidades por carteira/UF. (Todas sem responsável definido — atribuir.)</p></div>
+ <div class="row" style="margin-bottom:16px">
+  <a class="btn btn-primary btn-sm" onclick="toast('Top 10 da semana distribuída (simulado)')">Distribuir Top 10 da semana</a>
+  <a class="btn btn-ghost btn-sm" onclick="toast('Lista por vendedor gerada (simulado)')">Gerar lista por vendedor</a></div>
+ <div class="grid" style="grid-template-columns:1fr 1fr">
+  ${Object.entries(porCart).map(([c,ops])=>{ops=ops.slice().sort((a,b)=>b.score-a.score);return `<div class="card pad">
+   <div style="display:flex;align-items:center;margin-bottom:10px"><div class="sect-title" style="margin:0">${c}</div><span class="badge b-blue" style="margin-left:auto">${ops.length} oport. · ${fmtBRLk(sum(ops,o=>o.valor))}</span></div>
+   <div class="tbl-wrap"><table><thead><tr><th>Órgão</th><th>Cat.</th><th>Valor</th><th>Urg.</th><th>Score</th><th></th></tr></thead><tbody>
+   ${ops.slice(0,8).map(o=>`<tr onclick="location.hash='#/oportunidade/${o.id}'"><td class="t-strong">${o.orgaoPad.slice(0,26)}</td><td class="t-muted">${o.categoria}</td><td>${fmtBRLk(o.valor)}</td><td><span class="sem ${o.urgencia}"></span></td><td>${o.score}</td><td><a class="btn btn-ghost btn-sm" onclick="event.stopPropagation();toast('Em abordagem (simulado)')">Abordar</a></td></tr>`).join('')}
+   </tbody></table></div></div>`;}).join('')}</div>${disc()}`;}
+
+/* ===================== CONCORRENTES ===================== */
+function renderConcorrentes(){const cs=FORNS.slice(0,12);const maxV=Math.max(...cs.map(c=>c.valor));
+ view().innerHTML=`<div class="page-head"><h1>Fornecedores / Concorrentes</h1><p>Fornecedores atuais reais. Contratos deles = radar de ataque. (Marcados como "possível concorrente" até validação.)</p></div>
+ <div class="card pad" style="margin-bottom:16px"><div class="sect-title">Ranking por valor contratado (na rodada)</div><div style="display:flex;flex-direction:column;gap:9px">
+  ${cs.map(c=>`<div style="display:grid;grid-template-columns:230px 1fr 90px;align-items:center;gap:10px;font-size:12.5px"><span class="t-strong">${c.nome.slice(0,34)}${c.concorrente?' <span class="badge b-red" style="padding:0 6px">conc?</span>':''}</span>
+   <div style="height:13px;background:#EEF2F7;border-radius:7px;overflow:hidden"><i style="display:block;height:100%;width:${maxV?Math.round(c.valor/maxV*100):0}%;background:${c.concorrente?'var(--red)':'var(--blue)'}"></i></div><span class="t-muted">${fmtBRLk(c.valor)}</span></div>`).join('')}
+ </div></div>
+ <div class="grid" style="grid-template-columns:repeat(3,1fr)">
+  ${cs.slice(0,6).map(c=>`<div class="opp-card"><div style="font-weight:800">${c.nome.slice(0,30)}</div><div class="t-muted" style="margin:3px 0 8px">${c.cats.join(', ')} · ${c.ufs.join(', ')}</div>
+   <div style="display:flex;gap:10px;flex-wrap:wrap"><span class="badge b-gray">${c.n} contrato(s)</span><span class="badge b-amber">${fmtBRLk(c.valor)}</span>${c.vencendo?`<span class="badge b-red">${c.vencendo} na janela</span>`:''}</div>
+   <a class="btn btn-ghost btn-sm" style="margin-top:10px" onclick="FA={uf:null,cat:null,urg:null,janela:null,score:null,valor:null,forn:null,rev:null,venc:null,q:'${c.nome.replace(/'/g,'')}'};location.hash='#/busca?q='+encodeURIComponent('${c.nome.split(' ')[0]}')">Ver oportunidades</a></div>`).join('')}</div>${disc()}`;}
+
+/* ===================== QUALIDADE & REVISÃO ===================== */
+function renderQualidade(){const rev=OPP.filter(o=>o.revisao||o.conf==='Baixa'||o.dias==null||!o.fornecedor);
+ const semData=OPP.filter(o=>o.dias==null),baixa=OPP.filter(o=>o.conf==='Baixa'),semForn=OPP.filter(o=>!o.fornecedor);
+ view().innerHTML=`<div class="page-head"><h1>Qualidade & Revisão</h1><p>A plataforma controla a confiabilidade da base — casos que pedem validação humana antes de virar ação comercial.</p></div>
+ <div class="kpi-grid" style="margin-bottom:16px">${km('Para revisão',rev.length,'var(--amber)')}${km('Baixa confiança',baixa.length,'var(--red)')}${km('Sem data de término',semData.length,'var(--navy)')}${km('Sem fornecedor claro',semForn.length,'var(--muted)')}</div>
+ <div class="card pad"><div class="sect-title">Fila de validação</div><div class="tbl-wrap"><table><thead><tr><th>Órgão</th><th>UF</th><th>Categoria</th><th>Valor</th><th>Confiança</th><th>Motivo</th><th>Ações</th></tr></thead><tbody>
+  ${rev.length?rev.map(o=>`<tr><td class="t-strong">${o.orgaoPad}<div class="t-muted">${o.objeto.slice(0,46)}…</div></td><td>${o.uf}</td><td>${o.categoria}</td><td>${fmtBRL(o.valor)}</td><td><span class="badge ${o.conf==='Alta'?'b-green':o.conf==='Média'?'b-amber':'b-red'}">${o.conf}</span></td>
+   <td class="t-muted">${o.dias==null?'sem data; ':''}${o.conf==='Baixa'?'classificação incerta; ':''}${!o.fornecedor?'sem fornecedor; ':''}${o.revisao?'objeto ambíguo':''}</td>
+   <td style="white-space:nowrap"><a class="btn btn-ghost btn-sm" onclick="toast('Validada (simulado)')">Validar</a> <a class="btn btn-ghost btn-sm" onclick="toast('Marcada não-TI (simulado)')">Não-TI</a> <a class="btn btn-ghost btn-sm" onclick="location.hash='#/oportunidade/'+'${o.id}'">Abrir</a></td></tr>`).join('')
+   :`<tr><td colspan="7"><div class="empty">Base limpa — nada na fila.</div></td></tr>`}</tbody></table></div></div>${disc()}`;}
+
+/* ===================== ROUTER ===================== */
+function router(){const h=location.hash||'#/home';document.querySelectorAll('#nav a').forEach(a=>a.classList.remove('active'));
+ const m=h.match(/^#\/([a-z]+)/);const r=m?m[1]:'home';const a=document.querySelector(`#nav a[data-r="${r}"]`);if(a)a.classList.add('active');
+ if(h.startsWith('#/oportunidade/'))renderOportunidade(decodeURIComponent(h.split('/')[2]));
+ else if(h.startsWith('#/orgao/'))renderOrgao(h.split('/')[2]);
+ else if(r==='ataque')renderAtaque();
+ else if(r==='busca'){const q=h.match(/q=([^&]*)/);renderBusca(q?decodeURIComponent(q[1]):'');}
+ else if(r==='distribuicao')renderDistribuicao();
+ else if(r==='concorrentes')renderConcorrentes();
+ else if(r==='qualidade')renderQualidade();
+ else renderHome();
+ window.scrollTo(0,0);}
+function toast(msg){const t=document.createElement('div');t.className='toast';t.innerHTML=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>${msg}`;document.getElementById('toast').appendChild(t);setTimeout(()=>{t.style.opacity='0';t.style.transition='.4s';setTimeout(()=>t.remove(),400);},2600);}
+document.getElementById('gs').addEventListener('keydown',e=>{if(e.key==='Enter')location.hash='#/busca?q='+encodeURIComponent(e.target.value);});
+buildNav();window.addEventListener('hashchange',router);router();
+</script>
+</body>
+</html>

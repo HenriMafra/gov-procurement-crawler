@@ -1,0 +1,116 @@
+{
+  "_ajuda": "FASE 1 (validacao) — somente janela 2026, fetch paralelo, todos horizontes, score 0.",
+  "ufs": [
+    "DF",
+    "GO"
+  ],
+  "janelas": {
+    "_ajuda": "Modo RELATIVO: janelas andam sozinhas a cada semana, capturando contratos de 9/11/12/13/18/24/36 meses atrás (12m, 24m, 36m + renovações/aditivos vencendo agora). Pares [dias_atras_inicio, dias_atras_fim].",
+    "modo": "explicito",
+    "relativo_dias": [
+      [
+        284,
+        270
+      ],
+      [
+        344,
+        330
+      ],
+      [
+        374,
+        360
+      ],
+      [
+        404,
+        390
+      ],
+      [
+        554,
+        540
+      ],
+      [
+        734,
+        720
+      ],
+      [
+        1094,
+        1080
+      ]
+    ],
+    "explicito": [
+      [
+        "20260101",
+        "20260601"
+      ]
+    ]
+  },
+  "max_paginas_por_janela": 5000,
+  "vencido_recente_dias": 36500,
+  "futuro_max_dias": 36500,
+  "monitor_max_dias": 36500,
+  "valor_alto": 1000000,
+  "valor_minimo": 0,
+  "score_minimo": 0,
+  "_concorrentes_ajuda": "LISTA A VALIDAR PELA EMPRESA. Fragmentos do nome (minúsculo). Quando o fornecedor do contrato casar, marca Ameaça Alta e eleva o score.",
+  "concorrentes_conhecidos": [
+    "oracle",
+    "brasoftware",
+    "microsoft",
+    "dell",
+    "lenovo",
+    "hewlett packard",
+    "hpe",
+    "ibm",
+    "totvs",
+    "servix",
+    "lanlink",
+    "basis",
+    "stefanini",
+    "cast",
+    "indra",
+    "valid",
+    "tis",
+    "teltec",
+    "extreme digital",
+    "solo network",
+    "memora"
+  ],
+  "_responsaveis_ajuda": "Sugere responsável por UF e por categoria (cyber/software/servicos/infra/default). Substitua pelos nomes reais do time.",
+  "responsaveis": {
+    "DF": {
+      "default": "Comercial DF",
+      "cyber": "Especialista Cyber DF",
+      "software": "Especialista Software DF",
+      "servicos": "Gerente Serviços DF",
+      "infra": "Especialista Infra DF"
+    },
+    "GO": {
+      "default": "Comercial GO",
+      "cyber": "Especialista Cyber GO",
+      "software": "Especialista Software GO",
+      "servicos": "Gerente Serviços GO",
+      "infra": "Especialista Infra GO"
+    }
+  },
+  "responsavel_por_uf": {
+    "DF": "Comercial DF",
+    "GO": "Comercial GO"
+  },
+  "carteira_por_uf": {
+    "DF": "Conta-Chave DF",
+    "GO": "Goiás"
+  },
+  "usar_cache": true,
+  "limpar_cache": false,
+  "gerar_excel": true,
+  "gerar_prototipo": false,
+  "gerar_relatorio": true,
+  "gerar_pdf": false,
+  "compactar_entrega": false,
+  "http": {
+    "retries": 6,
+    "timeout": 45,
+    "sleep": 0.5
+  },
+  "_versao_pipeline": "ATLAS B2G v1.0 (produção)"
+}

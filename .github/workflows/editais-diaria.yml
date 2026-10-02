@@ -1,0 +1,29 @@
+name: Editais diários (MAPPER) — leve
+
+# Mantém a aba "Licitações" fresca TODO DIA com os editais de proposta ABERTA (9 UFs).
+# Leve e grátis: só as abertas (upsert por id_pncp, sem duplicar). O histórico longo
+# fica no outro workflow (3x/semana). Roda na nuvem — não depende de PC.
+on:
+  # A coleta diária de editais agora roda na VM Oracle (de graça). Aqui fica só manual (fallback).
+  workflow_dispatch: {}
+
+concurrency:
+  group: editais-diaria
+  cancel-in-progress: false
+
+jobs:
+  editais:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Coletar editais com proposta ABERTA (9 UFs)
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          ATLAS_FETCH_WORKERS: "2"
+        run: python coleta_editais_diaria.py

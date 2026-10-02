@@ -1,0 +1,92 @@
+{
+  "_ajuda": "ATLAS B2G — CONFIGURAÇÃO DE PRODUÇÃO. Rode: python src/atlas_weekly_runner.py --config config/atlas_config_producao.json --tag PRODUCAO",
+  "ufs": [
+    "DF",
+    "GO",
+    "CE",
+    "SP",
+    "MT",
+    "PR",
+    "PE",
+    "AM",
+    "RS"
+  ],
+  "_janelas_ajuda": "TEMP: janelas fixas que reaproveitam o cache nacional da rodada 4 (fim 2026-06-02), evitando re-fetch ao vivo e o throttle do PNCP. Quando o PNCP estiver liberado, voltar para {modo:ultimos_anos, anos:6} para auto-avançar a data.",
+  "janelas": {
+    "modo": "explicito",
+    "explicito": [
+      [
+        "20260101",
+        "20260602"
+      ],
+      [
+        "20250101",
+        "20251231"
+      ],
+      [
+        "20240101",
+        "20241231"
+      ],
+      [
+        "20230101",
+        "20231231"
+      ],
+      [
+        "20220101",
+        "20221231"
+      ],
+      [
+        "20210101",
+        "20211231"
+      ]
+    ]
+  },
+  "max_paginas_por_janela": 5000,
+  "vencido_recente_dias": 36500,
+  "futuro_max_dias": 36500,
+  "monitor_max_dias": 36500,
+  "valor_alto": 1000000,
+  "valor_minimo": 0,
+  "score_minimo": 0,
+  "_concorrentes_ajuda": "LISTA A VALIDAR PELA EMPRESA. Fragmentos do nome (minúsculo). Quando o fornecedor do contrato casar, marca Ameaça Alta e eleva o score.",
+  "concorrentes_conhecidos": [
+    "oracle",
+    "brasoftware",
+    "microsoft",
+    "dell",
+    "lenovo",
+    "hewlett packard",
+    "hpe",
+    "ibm",
+    "totvs",
+    "servix",
+    "lanlink",
+    "basis",
+    "stefanini",
+    "cast",
+    "indra",
+    "valid",
+    "tis",
+    "teltec",
+    "extreme digital",
+    "solo network",
+    "memora"
+  ],
+  "_responsaveis_ajuda": "Sugere responsável por UF e por categoria (cyber/software/servicos/infra/default). Substitua pelos nomes reais do time.",
+  "responsaveis": {},
+  "responsavel_por_uf": {},
+  "carteira_por_uf": {},
+  "usar_cache": true,
+  "limpar_cache": false,
+  "gerar_excel": false,
+  "gerar_prototipo": false,
+  "gerar_relatorio": false,
+  "gerar_pdf": false,
+  "compactar_entrega": false,
+  "http": {
+    "retries": 6,
+    "timeout": 45,
+    "sleep": 1.0
+  },
+  "_versao_pipeline": "ATLAS B2G v1.0 (produção)"
+}

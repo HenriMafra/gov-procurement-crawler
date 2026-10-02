@@ -1,0 +1,74 @@
+name: Coleta PNCP (MAPPER) — nuvem 24/7
+
+# Roda na infraestrutura do GitHub (sem depender de PC nenhum).
+# - Automático: 1x/semana (domingo 09:00 UTC = 06:00 BRT) em modo INCREMENTAL — gasto mínimo de minutos.
+# - Manual: botão "Run workflow" — escolha "incremental" (rápido) ou "completo" (refaz tudo p/ verificar erros).
+on:
+  schedule:
+    - cron: "0 9 * * 0"
+  workflow_dispatch:
+    inputs:
+      modo:
+        description: "incremental = rápido (reaproveita o que já tem, busca só o novo) | completo = refaz os 6 anos do zero (p/ verificar se faltou algo)"
+        type: choice
+        options: [incremental, completo]
+        default: incremental
+
+concurrency:
+  group: coleta-pncp
+  cancel-in-progress: false
+
+jobs:
+  coleta:
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    steps:
+      - name: Baixar o código
+        uses: actions/checkout@v4
+
+      - name: Preparar Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Instalar dependências
+        run: pip install -r requirements.txt
+
+      # CACHE: guarda as páginas já baixadas entre as rodadas. No modo INCREMENTAL,
+      # os anos antigos vêm daqui (não rebaixa) e só o período recente é puxado ao vivo.
+      # No modo COMPLETO, pulamos o cache de propósito pra refazer tudo do zero.
+      - name: Cache PNCP (acelera o incremental)
+        if: ${{ github.event.inputs.modo != 'completo' }}
+        uses: actions/cache@v4
+        with:
+          path: data/.cache_pncp
+          key: pncp-cache-v1-${{ github.run_id }}
+          restore-keys: |
+            pncp-cache-v1-
+
+      - name: Coletar do PNCP (9 UFs) e gravar no banco
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          ATLAS_FETCH_WORKERS: "2"
+        run: |
+          EXTRA=""
+          if [ "${{ github.event.inputs.modo }}" = "completo" ]; then
+            EXTRA="--no-cache"
+            echo "MODO COMPLETO: refazendo os 6 anos do zero (verificação)."
+          else
+            echo "MODO INCREMENTAL: reaproveitando cache; só o período recente é baixado."
+          fi
+          python src/atlas_weekly_runner.py \
+            --config config/atlas_config_semanal.json \
+            --tag PRODUCAO --write-db $EXTRA
+
+      - name: Guardar log da rodada (artefato)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coleta-log
+          path: |
+            logs/**
+          retention-days: 14
+          if-no-files-found: ignore

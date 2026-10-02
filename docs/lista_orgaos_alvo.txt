@@ -1,0 +1,221 @@
+DPF - Departamento de Polícia Federal
+CAESB - Companhia de Saneamento Ambiental do Distrito Federal
+CENTRO DE INFORMATICA E AUTOMACAO DO ESTADO DE SC S/A
+[SEEC] - Secretaria de Economia do Distrito Federal
+Superintendência Estadual de Tecnologia da Informação e Comunicação - SETIC
+ASSEMBLEIA LEGISLATIVA DO ESTADO DE GOIAS
+Agência Nacional de Transportes Terrestres - ANTT
+BANCO DO BRASIL
+Banrisul - Banco do Estado do Rio Grande do Sul
+BBTS -BB Tecnologia e Serviços
+ADVOCACIA BELLINATI PEREZ
+TSE - Tribunal Superior Eleitoral
+BRB - Banco de Brasília
+TECPAR - INSTITUTO DE TECNOLOGIA DO PARANA
+Celepar - Tecnologia da Informação e Comunicação do Paraná
+CFM - Conselho Federal de Medicina
+DNIT - Departamento Nacional de Infraestrutura de Transportes
+JFRS - Justiça Federal do Rio Grande do Sul
+MINISTÉRIO DAS CIDADES
+Ministério da Educação - MEC
+MINISTERIO DA GESTÃO E DA INOVAÇÃO
+DATASUS
+Ministério da Cultura
+MPGO
+PRF - Polícia Rodoviária Federal
+PROCEMPA - Companhia de Processamento de Dados de Porto Alegre
+PROCERGS
+SANEAMENTO DE GOIAS S/A- SANEAGO
+SEFAZ-RS
+SERPRO
+SESC GO
+SESCOOP NACIONAL
+SECRETARIA-GERAL DE GOVERNO
+GOVERNO DO PARANA - CASA CIVIL
+SICOOB
+STJ
+TELEBRAS
+Tribunal de Justiça do Estado de Goiás - TJGO
+TJRS
+Tribunal Regional Eleitoral do Pará - TRE PA
+TRE-PR
+TRF - Tribunal Regional Federal - 4ª Região
+TRT SC - 12ª Região
+TRT 18 - GO
+TRT-RS - 4º Região
+OCB
+JFPR - Justiça Federal do Paraná
+NEODENT
+Aço Cearense Industrial Ltda
+M. Dias Branco
+Justiça Federal da 5ª Região - JFCE
+SEFAZ-PR
+SENAC SC
+TJSC
+Urbano Alimentos
+CJF - CONSELHO DA JUSTIÇA FEDERAL
+Ministério do Meio Ambiente - MMA
+TELEBRÁS
+Agência Nacional de Telecomunicações - Anatel
+APEX
+Banco da Amazônia - BASA
+BRB Serviços
+Caixa Econômica Federal
+ESTADO DO RIO GRANDE DO SUL
+[CNJ] - Conselho Nacional de Justiça
+CODEVASF
+CTD - COMPANHIA DE TECNOLOGIA E DESENVOLVIMENTO S.A
+DEFENSORIA PUBLICA DO ESTADO DO RIO GRANDE DO SUL
+DEFENSORIA PUBLICA DO ESTADO DE GOIAS
+EBC - Empresa Brasil de Comunicação
+Empresa Brasileira de Serviços Hospitalares - EBSERH
+[ENAP]
+[FNDE]
+FUJIOKA ELETRO IMAGEM S.A
+Instituto Chico Mendes de Conservação da Biodiversidade - ICMBio
+INCRA
+Instituto de Pesquisa Econômica Aplicada
+Ministério da Agricultura, Pecuária e Abastecimento - MAPA
+Ministério do Desenvolvimento Regional - MDR
+Ministério Público do Estado do Rio Grande do Sul
+MPSC
+MINISTERIO DAS RELACOES EXTERIORES
+ORGANIZACAO DAS VOLUNTARIAS DE GOIAS - OVG
+[PGDF] Procuradoria Geral do Distrito Federal
+Prefeitura Municipal de Piraquara - PR
+SABIN
+Rede Sarah
+Secretaria da Saude - RS
+SEST SENAT
+SÃO SALVADOR ALIMENTOS S/A
+TCERS
+MINISTERIO TRANSPORTES
+TRE AL
+TRE BA
+Tribunal Regional Eleitoral do Ceará - TRE-CE
+TRIBUNAL REGIONAL ELEITORAL DO DISTRITO FEDERAL
+TRIBUNAL REGIONAL ELEITORAL DE GOIAS
+TRE-RS
+TRE SP
+TRF1
+TRT 10
+TRT PR - 9ª Região
+FUNDACAO UNIVERSIDADE FEDERAL DE CIENCIAS DA SAUDE DE PORTO ALEGRE - UFCSPA
+UNIVERSIDADE FEDERAL DE GOIAS
+ALESC
+CASHME
+COPACOL
+COPEL
+FEPESE
+FIEP
+FIESC
+FRIMESA
+FUNDAÇÃO COPEL
+FUNDAÇÃO UEPG
+FUNDAÇÃO SANEPAR
+INOVA PR
+LIGGA
+PREFEITURA MUNICIPAL BRUSQUE
+Prefeitura Municipal de Curitiba
+POSITIVO EDUCACIONAL
+POSITIVO S+ SOLUCOES EM TI
+POSITIVO TECNOLOGIA S/A
+BIOMANGUINHOS
+ICATU HOLDING S/A
+SCHEFFER & CIA
+AERIS INDUSTRIA
+MATEUS SUPERMERCADOS S.A.
+SUPERINTENDÊNCIA DE OBRAS PÚBLICAS - SOP
+SENAC PR
+SESC SC
+Tribunal de Justiça do Paraná
+TRE-SC
+UDESC
+UEPG
+UFPR
+UNIMED SUL CAPIXABA
+[UTFPR]
+ANA
+INSTITUTO DE GESTÃO ESTRATEGIA DE SAUDE DO DF
+PCDF - Polícia Civil do Distrito Federal
+SENAC - DF
+SES - Secretaria de Saúde do Distrito Federal
+STN
+Terracap
+Agência Brasileira de Desenvolvimento Industrial - ABDI
+AEB - Agência Espacial Brasileira
+AGIR - ASSOCIACAO DE GESTAO, INOVACAO E RESULTADOS EM SAUDE
+AGU - Advocacia Geral da União
+ANVISA
+APPMAX PLATAFORMAS DE PAGAMENTOS LTDA
+Atacadão Costa S/A
+Banco Regional de Desenvolvimento de Extremo Sul - BRDE
+GOIANIA CAMARA MUNICIPAL DE GOIANIA
+Camara dos Deputados
+CELGPAR
+Conselho Federal de Administração - CFA
+CFN - CONSELHO FEDERAL DE NUTRICÃO
+ENTERPRISECORE SOLUCOES EM TELEINFORMATICA LTDA
+Cooperativa Agrícola de Unaí Ltda - COAGRIL
+Construtora Villela e Carvalho
+DER - Departamento de Estradas de Rodagem
+DETRAN/PR
+Defensoria Pública do Distrito Federal
+[EMBRATUR]
+FIEG
+FIERGS
+[FUNCEF]
+GRAFENO
+Grendene S/A
+Hospital de Clínicas de Porto Alegre
+HSL - Hospital Santa Lucia
+IF- Goiano
+IFB
+IMBEL
+INEP
+IPASGO
+Kingspan Isoeste Cosntrutivos Isotermicos S.A.
+LOJAS RENNER
+Ministerio do Desenvolvimento Agrario
+COMPANHIA METROPOLITANA DO DF
+MPM - MINISTÉRIO PÚBLICO MILITAR
+MULTIDATA LTDA
+[PMDF]
+PORTO SECO CENTRO OESTE S/A
+Rodoil Distribuidora de Combustíveis S.A.
+Bermudes Advogados
+SESCOOP PERNAMBUCO
+SIPAM
+Tribunal Regional Eleitoral do Amazonas - TRE/AM
+Tribunal Regional Eleitoral do Amapá
+TRE MA
+TRE MG
+TRE MS
+TRE PB
+TRE PI
+TRE RJ
+TRE RO
+TRE RR
+TRE SE
+Tribunal Regional Eleitoral do Tocantins - TRE TO
+TRF 1
+TRINUS CO. PARTICIPACOES S.A
+Universal Leaf Tabacos Ltda
+RUMO
+CASA THOMAS JEFFERSON
+CNMP - Conselho Nacional do Ministério Público
+DETRAN/SC
+Duas Rodas
+Empresa De Pesquisa Agropecuária E Extensão Rural De Sc - Epagri S/A
+Hospital Nossa Senhora das Graças
+ICI Curitiba
+IFSC
+Grupo OVD
+Policia Civil de Santa Catarina - PCSC
+WR Engenharia
+CMCorp Soluções em Informática Ltda
+SANEPAR
+Santa Cruz Distribuidora de Medicamentos
+SERVICO SOCIAL DO COMERCIO - SESC - AR PARANA
+UFSC
+URBS CURITIBA
